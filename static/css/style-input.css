@@ -1,0 +1,198 @@
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.input-container {
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+    box-shadow: -8px 8px 40px rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.6s ease;
+}
+
+.input-container h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #222;
+    font-weight: bold;
+}
+
+.input-container .input-group {
+    margin: 15px 0;
+    width: 100%;
+    padding: 0;
+    position: relative;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-container input:focus {
+    border-color: #2e7dff;
+    box-shadow: 0px 0px 8px rgba(46, 125, 255, 0.3);
+}
+
+.input-container button {
+    background-color: #222;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.input-container button:hover {
+    background-color: #444;
+}
+
+.input-container p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #444;
+}
+
+.input-container p a {
+    color: #2e7dff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.input-container p a:hover {
+    color: #083993;
+}
+
+.input-container .password-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+
+}
+
+.input-container .password-group input {
+    width: 100%;
+    padding-right: 0;
+    box-sizing: border-box;
+}
+
+.input-container .password-group button {
+    position: absolute;
+    width: auto;
+    right: 10px;
+    background: none;
+    margin: 0;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2;
+}
+
+#confirm-password-input {
+    margin: 0;
+}
+
+.source-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.source-link a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s ease;
+}
+
+.source-link a:hover {
+    transform: scale(1.15);
+}
+
+.github-logo {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.flash-messages {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    z-index: 2000;
+    text-align: center;
+    animation: fadeInDrop 0.5s ease;
+}
+
+.flash {
+    width: auto;
+    display: block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.flash.error {
+    background: #ffeaea;
+    color: #d32f2f;
+}
+
+.flash.success {
+    background: #eaffea;
+    color: #388e3c;
+}
+
+.flash.info {
+    background: #eaf4ff;
+    color: #1976d2;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

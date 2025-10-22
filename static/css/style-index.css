@@ -1,0 +1,105 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+}
+
+.landing-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 450px;
+    text-align: justify;
+    box-shadow: -8px 8px 40px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    animation: fadeIn 0.6s ease;
+
+}
+
+.landing-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #222;
+    text-align: center;
+}
+
+.landing-container p {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    color: #444;
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.buttons button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #222;
+    color: white;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #444;
+}
+
+@media (max-width: 768px) {
+
+    .landing-container,
+    .login-container {
+        max-width: 100%;
+        padding: 30px;
+    }
+}
+
+.source-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.source-link a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s ease;
+}
+
+.source-link a:hover {
+    transform: scale(1.15);
+}
+
+.github-logo {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

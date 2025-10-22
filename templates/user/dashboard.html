@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard - Vehicle Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-locate.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-user.css') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="map"></div>
+    <div class="content">
+        <div class="user-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <h1>{{ current_user.username }}</h1>
+        </div>
+        <div class="sidebar">
+            <h1>User Dashboard</h1>
+            <button id="shareLocationBtn">Share Live Location</button>
+            <div class="location-data" id="locationData">
+                <div class="data-field">
+                    <label>Status</label>
+                    <p id="status">Not shared yet</p>
+                </div>
+                <div class="data-field">
+                    <label>Timestamp</label>
+                    <p id="timestamp">Not shared yet</p>
+                </div>
+                <div class="data-field">
+                    <label>Latitude</label>
+                    <p id="latitude">Not shared yet</p>
+                </div>
+                <div class="data-field">
+                    <label>Longitude</label>
+                    <p id="longitude">Not shared yet</p>
+                </div>
+            </div>
+
+            <a href="{{ url_for('auth.logout') }}">
+                <button id="logout">Logout</button>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/locate.js') }}" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/user.js') }}"></script>
+
+
+</body>
+
+</html>

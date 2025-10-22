@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Vehicle Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-input.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="margin:0; height:100vh; display:flex; justify-content:center; align-items:center; 
+    background: url('{{ url_for('static', filename='img/home-page.jpg') }}') no-repeat center center;
+    background-size: cover; font-family: Arial, sans-serif;">
+
+    <div class="source-link">
+        <a href="https://github.com/yourusername/yourrepo" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="github-logo"> Source ↗
+        </a>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+        <div class="input-container">
+            <h1><strong>User Registration</strong></h1>
+            <form method="POST">
+                <div class="input-group">
+                    <input type="text" name="username" placeholder="👤 Choose a username" required>
+                </div>
+                <div class="password-group">
+                    <input type="password" name="password" id="password-input" placeholder="🔒 Create a password" required>
+                    <button type="button" class="toggle-password" data-target="password-input">👁️</button>
+                </div>
+                <div class="password-group">
+                    <input type="password" name="confirm_password" id="confirm-password-input" placeholder="🔒 Confirm password" required>
+                    <button type="button" class="toggle-password" data-target="confirm-password-input">👁️</button>
+                </div>
+                <button type="submit" class="buttons"><strong>Register</strong></button>
+            </form>
+            <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/togglepasswd.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/placeholder.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
+</body>
+
+</html>

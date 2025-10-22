@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Tracker - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-index.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="margin:0; height:100vh; display:flex; justify-content:center; align-items:center; 
+             background: url('{{ url_for('static', filename='img/home-page.jpg') }}') no-repeat center center;
+             background-size: cover; font-family: Arial, sans-serif;">
+
+    <div class="source-link">
+        <a href="https://github.com/yourusername/yourrepo" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="github-logo"> Source ↗
+        </a>
+    </div>
+    <div class="landing-container">
+        <h1>Real-Time Vehicle Location Tracking & Monitoring</h1>
+        <p>
+            A secure and reliable solution for real-time vehicle location tracking.
+        </p>
+        <p>
+            Vehicles/Users can easily share their live location, while administrators monitor and manage multiple vehicles from a single dashboard.
+        </p>
+        <p>
+            Register or login as <strong>User</strong> or <strong>Administrator</strong> to continue.
+        </p>
+
+        <div class="buttons">
+            <a href="{{ url_for('auth.register') }}">
+                <button class="btn-register"><strong>Register</strong></button>
+            </a>
+            <a href="{{ url_for('auth.login') }}">
+                <button class="btn-login"><strong>Login</strong></button>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -32,8 +32,8 @@ A **real-time web application** for tracking users or vehicles using Flask as th
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/vehicle-tracking-flask.git
-cd vehicle-tracking-flask
+git clone https://github.com/akshay-404/Flask-Vehicle-Tracking.git
+cd Flask-Vehicle-Tracking
 ```
 
 ### 2️⃣ Create and Activate a Virtual Environment
@@ -66,10 +66,13 @@ Then open your browser at:
 ## 🗺️ Project Structure
 
 ```
-Vehicle-Tracking/
+Flask-Vehicle-Tracking/
 ├── app.py                # Main application entry point
 ├── sockets.py            # WebSocket events (real-time updates)
 ├── models.py             # Database models
+├── extensions.py         # Flask extensions (DB, Login, SocketIO)
+├── wsgi.py               # WSGI server configuration
+├── .env                  # Environment variables
 ├── auth/                 # Authentication routes (login/register)
 ├── user/                 # User dashboard routes
 ├── admin/                # Admin dashboard routes

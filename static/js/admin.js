@@ -8,7 +8,10 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 if (L.control.locate) {
     L.control.locate({
         setView: 'always',
-        clickBehavior: { inView: 'setView', outOfView: 'setView' },
+        clickBehavior: {
+            inView: 'setView',
+            outOfView: 'setView'
+        },
     }).addTo(map);
 }
 
@@ -20,11 +23,8 @@ const users = {};
 const colr = {};
 const userMarkers = {};
 let currentFrontMarker = null;
+let showAllMode = false;
 
-// 🆕 mode control flag
-let showAllMode = false; // false = Active users only, true = All users
-
-// 🆕 Hook buttons
 document.getElementById("show-active-btn").addEventListener("click", () => {
     showAllMode = false;
     refreshMarkers();
@@ -35,18 +35,17 @@ document.getElementById("show-all-btn").addEventListener("click", () => {
     refreshMarkers();
 });
 
-// Clear all markers button
 const clearAllBtn = document.getElementById("clear-all");
 if (clearAllBtn) {
     clearAllBtn.addEventListener("click", () => {
         for (const id in userMarkers) map.removeLayer(userMarkers[id]);
         Object.keys(userMarkers).forEach(id => delete userMarkers[id]);
         currentFrontMarker = null;
-        console.log("🗑️ All markers cleared");
     });
 }
 
 socket.on("connect", () => console.log("✅ Connected to WebSocket server"));
+
 socket.on("disconnect", () => console.log("❌ Disconnected from WebSocket server"));
 
 socket.on("logged_in_count", (count) => {
@@ -64,7 +63,6 @@ socket.on("user_status_update", (user) => {
     console.log("📡 Received user update:", user);
     updateUserRow(user);
 
-    // Update marker position ONLY if it already exists
     if (user.last_known_location && userMarkers[user.id]) {
         const [lat, lng, ts] = user.last_known_location.split(",");
         const parsedLat = parseFloat(lat);
@@ -73,7 +71,7 @@ socket.on("user_status_update", (user) => {
         if (!isNaN(parsedLat) && !isNaN(parsedLng)) {
             const [datePart, timePart] = String(ts).split("T");
             const cleanTime = timePart.split(".")[0];
-            
+
             const marker = userMarkers[user.id];
             marker.setLatLng([parsedLat, parsedLng]);
             marker.setPopupContent(`
@@ -85,11 +83,7 @@ socket.on("user_status_update", (user) => {
             `);
         }
     }
-
-    // ❌ Do NOT auto-create new markers on update
-    // Markers will only appear on button press or show-active/show-all
 });
-
 
 async function loadInitialUsers() {
     try {
@@ -107,7 +101,7 @@ async function loadInitialUsers() {
         });
 
         sortTable();
-        refreshMarkers(); // 🆕 initialize map markers
+        refreshMarkers();
     } catch (err) {
         console.error("❌ Error loading users:", err);
     }
@@ -119,11 +113,9 @@ function updateActiveCount(count) {
 
 function updateUserRow(user) {
     users[user.id] = user;
-
     let row = document.getElementById(`user-${user.id}`);
     let prevColor = "#000000";
 
-    // ✅ Preserve button color if row already exists
     if (row) {
         const existingBtn = row.querySelector("button");
         if (existingBtn) prevColor = existingBtn.style.color;
@@ -148,13 +140,10 @@ function updateUserRow(user) {
     `;
 
     const button = row.querySelector("button");
-
-    // ✅ if marker exists → keep active color
     if (userMarkers[user.id]) {
         const color = user.isactive ? "green" : "red";
         button.style.color = color;
     } else {
-        // else restore previous color (default black)
         button.style.color = prevColor;
     }
 }
@@ -178,7 +167,7 @@ const redIcon = L.icon({
     shadowSize: [41, 41]
 });
 
-window.showUserLocation = function (userId) {
+window.showUserLocation = function(userId) {
     const user = users[userId];
     if (!user || !user.last_known_location) {
         alert("No location data available for this user.");
@@ -187,29 +176,23 @@ window.showUserLocation = function (userId) {
 
     const button = document.querySelector(`#user-${user.id} button`);
     const color = user.isactive ? "green" : "red";
-
-    // Toggle marker visibility
     if (userMarkers[user.id]) {
-        // Marker already exists → remove it
         map.removeLayer(userMarkers[user.id]);
         delete userMarkers[user.id];
-        button.style.color = "#000000";  // back to default
+        button.style.color = "#000000";
         return;
     }
-
-    // Create new marker
     const marker = addMarker(user);
     if (marker) {
-        button.style.color = color;  // toggle to active color
-        // Bring it to front
+        button.style.color = color;
         marker.setZIndexOffset(1000);
         currentFrontMarker = marker;
-
         const [lat, lng] = user.last_known_location.split(",");
-        map.setView([parseFloat(lat), parseFloat(lng)], map.getMaxZoom() || 18, { animate: true });
+        map.setView([parseFloat(lat), parseFloat(lng)], map.getMaxZoom() || 18, {
+            animate: true
+        });
     }
 };
-
 
 function addMarker(user) {
     const [lat, lng, ts] = user.last_known_location.split(",");
@@ -230,25 +213,27 @@ function addMarker(user) {
         
     `;
 
-    const marker = L.marker([parsedLat, parsedLng], { icon })
+    const marker = L.marker([parsedLat, parsedLng], {
+            icon
+        })
         .addTo(map)
         .bindPopup(popupHtml, {
-            autoClose: false,       // ✅ don't close other popups
-            closeOnClick: false,    // ✅ clicking map won't close
-            closeButton: true       // ✅ show the X close button
+            autoClose: false,
+            closeOnClick: false,
+            closeButton: true
         })
-        .openPopup();              // ✅ open it immediately
-map.setView([lat, lng], map.getMaxZoom() || 18, { animate: true });
+        .openPopup();
+    map.setView([lat, lng], map.getMaxZoom() || 18, {
+        animate: true
+    });
     userMarkers[user.id] = marker;
     return marker;
 }
 
 function refreshMarkers() {
-    // Remove all existing markers from the map
     for (const id in userMarkers) map.removeLayer(userMarkers[id]);
     Object.keys(userMarkers).forEach(id => delete userMarkers[id]);
 
-    // Add markers for users with valid last_known_location
     Object.values(users).forEach(user => {
         if ((showAllMode || user.isactive) && user.last_known_location) {
             const locParts = user.last_known_location.split(",");
@@ -257,8 +242,6 @@ function refreshMarkers() {
             }
         }
     });
-
-    console.log(`🗺 Refreshed markers — mode: ${showAllMode ? "All" : "Active only"}`);
 }
 
 function sortTable() {

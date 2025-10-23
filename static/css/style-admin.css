@@ -6,7 +6,6 @@ body {
     width: 100%;
     overflow: hidden;
     font-family: "Poppins", sans-serif;
-
 }
 
 .side-bar {
@@ -26,7 +25,6 @@ body {
     justify-content: flex-start;
 }
 
-/* Map takes the remaining central space */
 #map {
     position: absolute;
     top: 0px;
@@ -46,10 +44,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
-
-
 }
-
 
 .panel {
     height: 50px;
@@ -69,8 +64,6 @@ body {
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-
 }
 
 .panel-box h3 {
@@ -151,6 +144,7 @@ body {
 .leaflet-popup-content {
     margin: 5px;
 }
+
 .leaflet-top .leaflet-control {
     margin-left: 22px;
 }
@@ -216,7 +210,7 @@ body {
     gap: 10px;
 }
 
-#logged-in{
+#logged-in {
     font-weight: bold;
     font-size: small;
 }
@@ -237,7 +231,6 @@ body {
     border-radius: 50%;
     border: 0.5px solid #76767647;
     transition: all 0.3s ease;
-
 }
 
 #logout:hover {
@@ -279,7 +272,6 @@ body {
     font-weight: normal;
     color: #370617bb;
     white-space: nowrap;
-
 }
 
 #datetime-container {
@@ -293,7 +285,6 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-
 }
 
 #logged-in {

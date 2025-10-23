@@ -6,5 +6,4 @@ user_bp = Blueprint("user", __name__, url_prefix="/user")
 @user_bp.route("/dashboard")
 @login_required
 def dashboard():
-    """Render the user dashboard"""
     return render_template("user/dashboard.html", user=current_user)

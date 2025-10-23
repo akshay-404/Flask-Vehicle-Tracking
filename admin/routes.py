@@ -12,9 +12,7 @@ def dashboard():
     total_users = User.query.filter_by(role="user").count()
 
     return render_template(
-        "admin/dashboard.html",
-        total_users=total_users,
-        user=current_user
+        "admin/dashboard.html", total_users=total_users, user=current_user
     )
 
 @admin_bp.route("/api/users")
@@ -25,16 +23,20 @@ def get_users():
     for user in users:
         if user.role == "admin":
             continue
-        data.append({
-            "id": user.id,
-            "username": user.username,
-            "last_known_location": user.last_known_location,
-            "isactive": user.isactive
-        })
+        data.append(
+            {
+                "id": user.id,
+                "username": user.username,
+                "last_known_location": user.last_known_location,
+                "isactive": user.isactive,
+            }
+        )
     return jsonify(data)
 
 @admin_bp.route("/api/users_count")
 @login_required
 def get_users_count():
     active_count = User.query.filter_by(isactive=True, role="user").count()
-    return jsonify({"active_user_count": active_count})
+    return jsonify({
+            "active_user_count": active_count
+        })

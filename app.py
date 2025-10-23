@@ -12,23 +12,19 @@ def create_app():
     app.config["SECRET_KEY"] = "supersecretkey"
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///vehicle-tracker.db"
 
-    # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
     bcrypt.init_app(app)
-    socketio.init_app(app)  # ✅ Attach SocketIO to this Flask app
+    socketio.init_app(app)
 
-    # Register blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(user_bp, url_prefix="/user")
     app.register_blueprint(admin_bp)
 
-    # Landing page
     @app.route("/")
     def landing():
         return render_template("index.html")
 
-    # Create admin user if not existing
     with app.app_context():
         db.create_all()
         if not User.query.filter_by(role="admin").first():
@@ -39,7 +35,6 @@ def create_app():
             )
             db.session.add(admin)
             db.session.commit()
-
     return app
 
 

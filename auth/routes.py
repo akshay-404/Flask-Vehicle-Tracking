@@ -10,12 +10,10 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-
         user = User.query.filter_by(username=username).first()
 
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
-
             if user.role == "admin":
                 return redirect(url_for("admin.dashboard"))
             else:
@@ -25,7 +23,6 @@ def login():
             return redirect(url_for("auth.login"))
 
     return render_template("auth/login.html")
-
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
@@ -40,7 +37,6 @@ def register():
         new_user = User(username=username, password=password, role="user")
         db.session.add(new_user)
         db.session.commit()
-
         flash("Registration successful! Please log in.", "success")
         return redirect(url_for("auth.login"))
 

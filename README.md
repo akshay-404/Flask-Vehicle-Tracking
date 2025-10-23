@@ -24,7 +24,7 @@ A **real-time web application** for tracking users or vehicles using Flask as th
 | **Database** | SQLite (later AWS RDS/S3) |
 | **Realtime** | Socket.IO |
 | **Environment** | Python (virtualenv / .venv) |
-| **Deployment** | AWS EC2 (Ubuntu, Gunicorn, Apache) |
+| **Deployment** | AWS EC2 (Ubuntu, Gunicorn, Nginx) |
 
 ---
 

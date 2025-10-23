@@ -1,7 +1,6 @@
 # 🚗 Vehicle Tracking System (Flask + Socket.IO + Leaflet)
 
-A **real-time web application** for tracking users or vehicles using Flask as the backend, Socket.IO for live updates, and Leaflet.js for interactive map visualization.  
-Admins can monitor active users, view their last known locations, and dynamically display or hide markers on the map.
+A **real-time web application** for tracking users or vehicles using Flask as the backend, Socket.IO for live updates, and Leaflet.js for interactive map visualization. Admins can monitor active users, view their last known locations, and dynamically display or hide markers on the map.
 
 ---
 

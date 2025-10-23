@@ -21,9 +21,10 @@ A **real-time web application** for tracking users or vehicles using Flask as th
 |-------|--------------------|
 | **Backend** | Flask, Flask-SocketIO, Flask-Login |
 | **Frontend** | HTML, CSS, JavaScript, Leaflet.js |
-| **Database** | SQLite |
+| **Database** | SQLite (later AWS RDS/S3) |
 | **Realtime** | Socket.IO |
 | **Environment** | Python (virtualenv / .venv) |
+| **Deployment** | AWS EC2 (Ubuntu, Gunicorn, Apache) |
 
 ---
 

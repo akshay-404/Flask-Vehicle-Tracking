@@ -6,12 +6,13 @@ from auth.routes import auth_bp
 from user.routes import user_bp
 from admin.routes import admin_bp
 from models import User
+from dotenv import load_dotenv
+import os
 
 def create_app():
     app = Flask(__name__)
-    app.config["SECRET_KEY"] = "supersecretkey"
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///vehicle-tracker.db"
-
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+    app.config["DATABASE_URL"] = os.getenv("DATABASE_URL")
     db.init_app(app)
     login_manager.init_app(app)
     bcrypt.init_app(app)
@@ -29,8 +30,8 @@ def create_app():
         db.create_all()
         if not User.query.filter_by(role="admin").first():
             admin = User(
-                username="admin",
-                password=bcrypt.generate_password_hash("admin123").decode("utf-8"),
+                username=os.getenv("ADMIN_USERNAME"),
+                password=bcrypt.generate_password_hash(os.getenv("ADMIN_PASSWORD")).decode("utf-8"),
                 role="admin",
             )
             db.session.add(admin)

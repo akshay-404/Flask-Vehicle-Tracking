@@ -10,12 +10,17 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
+prod = os.getenv("FLASK_ENV") == "production"
 
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+    if prod:
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL_PROD")
+    else:    
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL_DEV")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['WTF_CSRF_ENABLED'] = True
 
     db.init_app(app)
     login_manager.init_app(app)

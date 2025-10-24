@@ -32,7 +32,7 @@ def handle_share_location(data):
         set_active(True)
         latitude = data.get("latitude")
         longitude = data.get("longitude")
-        ts = datetime.now().isoformat()
+        ts = data.get("timestamp")
         latest_locations[current_user.id] = f"{latitude},{longitude},{ts}"
         print(
             f"📍 Location fetched: {current_user.username} {latitude}, {longitude} {ts}",

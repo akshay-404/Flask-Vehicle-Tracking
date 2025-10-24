@@ -34,7 +34,8 @@ function updateLocationUI(lat, lng) {
 }
 
 function sendLocation(lat, lng) {
-    const payload = { latitude: lat, longitude: lng };
+    const now = new Date().toISOString();
+    const payload = { latitude: lat, longitude: lng, timestamp: now };
     socket.emit("share_location", payload);
     console.log("📍 Location emitted:", payload);
 }

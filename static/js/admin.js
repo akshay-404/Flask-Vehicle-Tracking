@@ -69,8 +69,9 @@ socket.on("user_status_update", (user) => {
         const parsedLng = parseFloat(lng);
 
         if (!isNaN(parsedLat) && !isNaN(parsedLng)) {
-            const [datePart, timePart] = String(ts).split("T");
-            const cleanTime = timePart.split(".")[0];
+            const datetime = new Date(ts);
+            const timePart = datetime.toLocaleTimeString();
+            const datePart = datetime.toLocaleDateString();
 
             const marker = userMarkers[user.id];
             marker.setLatLng([parsedLat, parsedLng]);
@@ -79,7 +80,7 @@ socket.on("user_status_update", (user) => {
                     <b>${user.username}</b></div>
                     ${user.isactive ? "🟢 Active" : "🔴 Last Active"}<br>
                     📅 ${datePart}<br>
-                    🕒 ${cleanTime}
+                    🕒 ${timePart}
             `);
         }
     }
@@ -167,7 +168,7 @@ const redIcon = L.icon({
     shadowSize: [41, 41]
 });
 
-window.showUserLocation = function(userId) {
+window.showUserLocation = function (userId) {
     const user = users[userId];
     if (!user || !user.last_known_location) {
         alert("No location data available for this user.");
@@ -201,21 +202,22 @@ function addMarker(user) {
     if (isNaN(parsedLat) || isNaN(parsedLng)) return null;
 
     const icon = user.isactive ? blueIcon : redIcon;
-    const [datePart, timePart] = String(ts).split("T");
-    const cleanTime = timePart?.split(".")[0] || "";
+    const datetime = new Date(ts);
+    const timePart = datetime.toLocaleTimeString();
+    const datePart = datetime.toLocaleDateString();
 
     const popupHtml = `
         <div style="text-align:center;">
             <b>${user.username}</b></div>
             ${user.isactive ? "🟢 Active" : "🔴 Last Active"}<br>
             📅 ${datePart}<br>
-            🕒 ${cleanTime}
+            🕒 ${timePart}
         
     `;
 
     const marker = L.marker([parsedLat, parsedLng], {
-            icon
-        })
+        icon
+    })
         .addTo(map)
         .bindPopup(popupHtml, {
             autoClose: false,

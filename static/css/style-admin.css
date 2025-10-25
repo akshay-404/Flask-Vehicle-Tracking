@@ -180,13 +180,6 @@ body {
     background-color: rgba(0, 140, 186, 0.9);
 }
 
-.show-btns #show-active-btn:hover {
-    background-color: rgba(4, 170, 109, 1);
-}
-
-.show-btns #show-all-btn:hover {
-    background-color: rgba(0, 140, 186, 1);
-}
 
 #clear-all {
     margin: 0;
@@ -197,16 +190,13 @@ body {
     margin: 10px 0;
 }
 
-#clear-all:hover {
-    background-color: rgba(244, 67, 54, 1);
 
-}
 
 .bottom {
-    margin-top: auto;
-    margin-bottom: 20px;
+    margin: 20px 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 10px;
 }
 
@@ -224,19 +214,25 @@ body {
 }
 
 
-#logout {
+#logout,
+#refresh {
     font-size: 22px;
-    color: #6A040F;
     padding: 10px 10px;
     border-radius: 50%;
     border: 0.5px solid #76767647;
     transition: all 0.3s ease;
 }
 
-#logout:hover {
-    background-color: #6A040F;
-    color: #fff;
+#logout {
+    color: #6A040F;
+
 }
+
+#refresh {
+    color: #495057;
+}
+
+
 
 .admin-tag {
     display: flex;
@@ -348,5 +344,36 @@ body {
 
     .leaflet-top .leaflet-control {
         margin-left: 10px;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .show-btns #show-active-btn:hover,
+    .show-btns #show-active-btn:active {
+        background-color: rgba(4, 170, 109, 1);
+    }
+
+    .show-btns #show-all-btn:hover,
+    .show-btns #show-all-btn:active {
+        background-color: rgba(0, 140, 186, 1);
+    }
+
+    #clear-all:hover,
+    #clear-all:active {
+        background-color: rgba(244, 67, 54, 1);
+
+    }
+
+    #logout:hover,
+    #logout:active {
+        background-color: #6A040F;
+        color: #fff;
+    }
+
+    #refresh:hover,
+    #refresh:active {
+        background-color: #495057;
+        color: #fff;
     }
 }

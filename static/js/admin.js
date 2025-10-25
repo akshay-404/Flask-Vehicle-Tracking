@@ -44,6 +44,13 @@ if (clearAllBtn) {
     });
 }
 
+const refreshBtn = document.getElementById("refresh");
+if (refreshBtn) {
+    refreshBtn.addEventListener("click", () => {
+        loadInitialUsers();
+    });
+}
+
 socket.on("connect", () => console.log("✅ Connected to WebSocket server"));
 
 socket.on("disconnect", () => console.log("❌ Disconnected from WebSocket server"));

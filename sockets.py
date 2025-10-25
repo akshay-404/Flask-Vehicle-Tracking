@@ -11,19 +11,21 @@ logged_in = 0
 @socketio.on("connect")
 def handle_connect():
     global logged_in
-    logged_in += 1
-    admin_count = User.query.filter_by(role="admin", isactive=True).count()
+    user = User.query.get(current_user.id)
+    if user and user.role != "admin":
+        logged_in += 1
     emit("active_user_count", len(active_status), broadcast=True)
-    emit("logged_in_count", logged_in - admin_count, broadcast=True)
+    emit("logged_in_count", logged_in, broadcast=True)
     print(f"✅ WebSocket client {current_user.username} connected")
 
 @socketio.on("disconnect")
 def handle_disconnect():
     global logged_in
-    logged_in -= 1
-    admin_count = User.query.filter_by(role="admin", isactive=True).count()
+    user = User.query.get(current_user.id)
+    if user and user.role != "admin":
+        logged_in -= 1
     set_active(False)
-    emit("logged_in_count", logged_in - admin_count, broadcast=True)
+    emit("logged_in_count", logged_in, broadcast=True)
     print(f"❌ WebSocket client {current_user.username} disconnected")
 
 @socketio.on("share_location")

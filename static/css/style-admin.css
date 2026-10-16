@@ -193,7 +193,8 @@ body {
 
 
 .bottom {
-    margin: 20px 0;
+    margin-top: auto;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
